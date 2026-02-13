@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 
+
 export const eventRouter: Router = express.Router()
 
 eventRouter.get("/events/:id")
