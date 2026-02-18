@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
 import { Event } from "../models/models";
 import { HTTP_STATUS } from "src/constants/httpConstants";
-import { deleteEventService, getAllEventsService, getEventByIdService, createEventService, updateEventService } from "../services/eventServices";
+import {
+  deleteEventService,
+  getAllEventsService,
+  getEventByIdService,
+  createEventService,
+  updateEventService,
+} from "../services/eventServices";
 
 export const getAllEvents = (req: Request, res: Response): void => {
   try {
@@ -30,9 +36,7 @@ export const deleteEvent = (req: Request, res: Response): void => {
 };
 
 export const getEventById = (req: Request, res: Response): void => {
-  const event: Event | undefined = getEventByIdService(
-    Number(req.params.id),
-  );
+  const event: Event | undefined = getEventByIdService(Number(req.params.id));
 
   if (event) {
     res.status(HTTP_STATUS.OK).json({ message: "Event found", data: event });
@@ -67,7 +71,6 @@ export const createEvent = (req: Request, res: Response): void => {
     });
   }
 };
-
 
 export const updateEvent = (req: Request, res: Response): void => {
   const updatedEvent: Event = req.body;

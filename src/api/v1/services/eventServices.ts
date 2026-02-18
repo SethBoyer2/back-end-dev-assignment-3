@@ -1,26 +1,24 @@
 import { Event } from "../models/models";
 
+const COLLECTION = "events";
 
-const COLLECTION = "events"
-
-const events: Event[] = []
+const events: Event[] = [];
 
 export const getAllEventsService = (): Event[] => {
-    return events
-
-}
+  return events;
+};
 
 export const createEventService = (event: Event): Event => {
-    events.push(event)
-    return event
-}
+  events.push(event);
+  return event;
+};
 
 export const getEventByIdService = (id: number): Event | undefined => {
-    return events.find(event => event.id === id);
+  return events.find((event) => event.id === id);
 };
 
 export const deleteEventService = (id: number): boolean => {
-  const index = events.findIndex(e => e.id === id);
+  const index = events.findIndex((e) => e.id === id);
 
   if (index === -1) return false;
 
@@ -28,16 +26,18 @@ export const deleteEventService = (id: number): boolean => {
   return true;
 };
 
-export const updateEventService = (id: number, updatedEvent: Event): Event | undefined => {
-    const index = events.findIndex(e => e.id === id)
+export const updateEventService = (
+  id: number,
+  updatedEvent: Event,
+): Event | undefined => {
+  const index = events.findIndex((e) => e.id === id);
 
-    if (index === -1) return undefined
+  if (index === -1) return undefined;
 
-    events [index] = {
-        ...events[index],
-        ...updatedEvent,
-    }
+  events[index] = {
+    ...events[index],
+    ...updatedEvent,
+  };
 
-    return events[index]
-}
-
+  return events[index];
+};

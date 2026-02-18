@@ -6,16 +6,12 @@ import morgan from "morgan";
 
 const app: Express = express();
 
-
 app.use(morgan("combined"));
 app.use(express.json());
-app.use("/api/v1/", eventRouter)
-
+app.use("/api/v1/", eventRouter);
 
 app.get("/", (req, res) => {
-
-   res.send("Hello, World!");
-
+  res.send("Hello, World!");
 });
 
-export default app
+export default app;
