@@ -1,6 +1,6 @@
 import { Event } from "../models/models";
 
-const COLLECTION = "events";
+//const COLLECTION = "events";
 
 const events: Event[] = [];
 

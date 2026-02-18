@@ -1,4 +1,4 @@
-import Joi, { ObjectSchema } from "joi";
+import Joi from "joi";
 
 export const itemSchemas = {
   create: {
@@ -37,4 +37,13 @@ export const itemSchemas = {
         }),
     }),
   },
+
+  getById: {
+    params: Joi.object({
+        id: Joi.string().required().messages({
+            "any.required": "Item ID is required",
+            "string.empty": "Item ID cannot be empty"
+        })
+    })
+  }
 };
