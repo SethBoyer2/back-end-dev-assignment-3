@@ -9,7 +9,6 @@ import {
   updateEventService,
 } from "../services/eventServices";
 
-
 export const getAllEvents = (req: Request, res: Response): void => {
   try {
     const events = getAllEventsService();
@@ -49,16 +48,6 @@ export const getEventById = (req: Request, res: Response): void => {
 export const createEvent = (req: Request, res: Response): void => {
   // Create new Event object
   try {
-    if (!req.body.title || typeof req.body.title !== "string") {
-      throw new Error("Missing required field: Title");
-    }
-    if (!req.body.description || typeof req.body.description !== "string") {
-      throw new Error("Missing required field: description");
-    }
-    if (!req.body.priority || typeof req.body.priority !== "string") {
-      throw new Error("Missing required field: priority");
-    }
-
     const event: Event = req.body;
     const createdEvent = createEventService(event);
 
@@ -88,5 +77,3 @@ export const updateEvent = (req: Request, res: Response): void => {
     res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Event not found" });
   }
 };
-
-// getAllEventsService, createEventService, getEventByIdService, deleteEventService, updateEventService
