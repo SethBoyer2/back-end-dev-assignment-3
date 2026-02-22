@@ -2,7 +2,7 @@ import { Event } from "../models/models";
 
 //const COLLECTION = "events";
 
-const events: Event[] = [];
+export const events: Event[] = [];
 
 export const getAllEventsService = (): Event[] => {
   return events;
