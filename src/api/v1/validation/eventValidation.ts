@@ -8,9 +8,10 @@ export const itemSchemas = {
         "string.empty": "Name cannot be empty.",
       }),
 
-      date: Joi.date().iso().required().messages({
+      date: Joi.date().iso().greater('now').required().messages({
         "any.required": "Date is required.",
         "date.empty": "Date cannot be empty.",
+        "date.greater": "The event date must be in the future."
       }),
 
       capacity: Joi.number().integer().min(5).required().messages({
