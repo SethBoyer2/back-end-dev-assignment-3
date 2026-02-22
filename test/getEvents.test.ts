@@ -12,7 +12,7 @@ describe("Get Events test", () => {
   it("Should return all events", async () => {
 
     // Act
-    const result = await services.getAllEventsService
+    const result = await services.getAllEventsService()
 
     // Assert
     expect(result.length).toBe(2)
