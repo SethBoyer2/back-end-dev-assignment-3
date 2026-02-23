@@ -1,10 +1,10 @@
-import { db } from "config/firebaseConfig";
-import { FirestoreDataTypes } from "../types/firestore";
+import { db } from "../../../../config/firebaseConfig";
+// import { FirestoreDataTypes } from "../types/firestore";
 
-interface FieldValuePair {
-    fieldName: string;
-    fieldValue: FirestoreDataTypes;
-}
+// interface FieldValuePair {
+//     fieldName: string;
+//     fieldValue: FirestoreDataTypes;
+// }
 
 // Repository sample code taken from another demo file
 

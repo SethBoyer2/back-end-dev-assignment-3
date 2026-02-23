@@ -1,4 +1,3 @@
-import { getEventById } from "../controllers/eventControllers";
 import { Event } from "../models/models";
 import {
     createDocument,

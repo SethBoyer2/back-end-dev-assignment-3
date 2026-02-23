@@ -49,7 +49,7 @@ export const createEvent = async (req: Request, res: Response, next: NextFunctio
   // Create new Event object
   try {
     const event: Event = req.body
-    const createdEvent = createEventService(event)
+    const createdEvent = await createEventService(event)
 
         const newEvent: Event = await createEventService(createdEvent)
         res.status(HTTP_STATUS.CREATED).json(
