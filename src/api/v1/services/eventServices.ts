@@ -58,8 +58,34 @@ export const createEventService = async (eventData: {
     }
 };
 
-export const getEventByIdService = (id: string): Event | undefined => {
-  return events.find((event) => event.id === id);
+export const getEventByIdService = async (id: string): Promise<Event> => {
+    try {
+        const doc = await getDocumentById(COLLECTION, id);
+        if (!doc) {
+            throw new Error(`Item with ID ${id} not found`);
+        }
+
+        const data = doc.data();
+        if (!data) {
+          throw new Error(`No Valid Data.`)
+        }
+
+        const event: Event = {
+            id: doc.id,
+            name: data.name,
+            date:data.date.toDate(),
+            capacity: data.capacity,
+            registrationCount: data.registrationCount,
+            status: data.status,
+            category: data.category,
+            createdAt: data.createdAt?.toDate() || new Date(),
+            updatedAt: data.updatedAt?.toDate() || new Date(),
+        } as Event;
+
+        return event;
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const deleteEventService = (id: string): boolean => {
