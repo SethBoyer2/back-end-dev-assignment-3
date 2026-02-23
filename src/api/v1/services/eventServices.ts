@@ -1,18 +1,61 @@
 import { Event } from "../models/models";
-import * as firestoreRepository from "../repositories/firestoreRepository"
+import {
+    createDocument,
+    getDocuments,
+    getDocumentById,
+    updateDocument,
+    deleteDocument,
+} from "../repositories/firestoreRepository";
 
 
 const COLLECTION = "events";
 
 export const events: Event[] = [];
 
-export const getAllEventsService = (): Event[] => {
-  return events;
+export const getAllEventsService = async (): Promise<Event[]> => {
+    try {
+        const snapshot = await getDocuments(COLLECTION);
+        const events: Event[] = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            return {
+                id: doc.id, // Had to explicitly pass all values, the spread from the demo file resulted in type errors
+                name: data.name,
+                date:data.date.toDate(),
+                capacity: data.capacity,
+                registrationCount: data.registrationCount,
+                status: data.status,
+                category: data.category,
+                createdAt: data.createdAt?.toDate() || new Date(),
+                updatedAt: data.updatedAt?.toDate() || new Date(),
+            } as Event;
+        });
+        return events;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const createEventService = (event: Event): Event => {
-  events.push(event);
-  return event;
+export const createEventService = async (eventData: {
+    name : String,
+    date : Date,
+    capacity : Number,
+    registrationCount : Number,
+    status : String,
+    category : String
+}): Promise<Event> => {
+    try {
+        const now = new Date();
+        const newEventData = {
+            ...eventData,
+            createdAt: now,
+            updatedAt: now,
+        };
+
+        const id = await createDocument<Event>(COLLECTION, newEventData);
+        return { id, ...newEventData } as Event;
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const getEventByIdService = (id: string): Event | undefined => {
