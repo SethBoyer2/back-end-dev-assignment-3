@@ -33,14 +33,16 @@ export const deleteEvent = async (req: Request, res: Response, next: NextFunctio
     }
 };
 
-export const getEventById = (req: Request, res: Response): void => {
-  const event: Event | undefined = getEventByIdService(String(req.params.id));
-
-  if (event) {
-    res.status(HTTP_STATUS.OK).json({ message: "Event found", data: event });
-  } else {
-    res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Event not found" });
-  }
+export const getEventById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const id = req.params.id as string;
+        const event: Event = await getEventByIdService(id);
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(event, "Item retrieved successfully")
+        );
+    } catch (error) {
+        next(error);
+    }
 };
 
 export const createEvent = (req: Request, res: Response): void => {
