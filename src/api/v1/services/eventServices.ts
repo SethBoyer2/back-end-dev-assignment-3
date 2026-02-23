@@ -1,3 +1,4 @@
+import { getEventById } from "../controllers/eventControllers";
 import { Event } from "../models/models";
 import {
     createDocument,
@@ -88,27 +89,36 @@ export const getEventByIdService = async (id: string): Promise<Event> => {
     }
 };
 
-export const deleteEventService = (id: string): boolean => {
-  const index = events.findIndex((e) => e.id === id);
+export const deleteEventService = async (id: string): Promise<void> => {
+    try {
+        // Check if item exists before deleting
+        const doc = await getDocumentById(COLLECTION, id);
+        if (!doc) {
+            throw new Error(`Item with ID ${id} not found`);
+        }
 
-  if (index === -1) return false;
-
-  events.splice(index, 1);
-  return true;
+        await deleteDocument(COLLECTION, id);
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const updateEventService = (
-  id: string,
-  updatedEvent: Partial<Event>,
-): Event | undefined => {
-  const index = events.findIndex((e) => e.id === id);
+export const updateEventService = async (
+    id: string,
+    eventData: Pick<Event, "name" | "date" | "capacity" | "status" | "category">
+): Promise<Event> => {
+    try {
+        const updateData = {
+            ...eventData,
+            updatedAt: new Date(),
+        };
 
-  if (index === -1) return undefined;
+        await updateDocument<Event>(COLLECTION, id, updateData);
 
-  events[index] = {
-    ...events[index],
-    ...updatedEvent,
-  };
-
-  return events[index];
+        // Return the updated item
+        const updatedEvent = await getEventByIdService(id);
+        return updatedEvent;
+    } catch (error) {
+        throw error;
+    }
 };
