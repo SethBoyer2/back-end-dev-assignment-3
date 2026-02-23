@@ -1,5 +1,5 @@
 export interface Event {
-    "id" : Number,
+    "id" : String,
     "name" : String,
     "date" : Date,
     "capacity" : Number,

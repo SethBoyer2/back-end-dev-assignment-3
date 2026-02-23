@@ -5,8 +5,8 @@ describe("Get Events test", () => {
     beforeEach(() => {
         events.length = 0
         events.push (
-            { id: 1, name: "Evil George Bush meeting", date: new Date(), capacity: 50, registrationCount: 0, status: "Active", category: "Tech" },
-            { id: 2, name: "George Washington funtime", date: new Date(), capacity: 50, registrationCount: 0, status: "Active", category: "Tech" }
+            { id: "1", name: "Evil George Bush meeting", date: new Date(), capacity: 50, registrationCount: 0, status: "Active", category: "Tech" },
+            { id: "2", name: "George Washington funtime", date: new Date(), capacity: 50, registrationCount: 0, status: "Active", category: "Tech" }
         )
     })
   it("Should return all events", async () => {

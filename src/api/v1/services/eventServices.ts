@@ -1,6 +1,8 @@
 import { Event } from "../models/models";
+import * as firestoreRepository from "../repositories/firestoreRepository"
 
-//const COLLECTION = "events";
+
+const COLLECTION = "events";
 
 export const events: Event[] = [];
 
@@ -13,11 +15,11 @@ export const createEventService = (event: Event): Event => {
   return event;
 };
 
-export const getEventByIdService = (id: number): Event | undefined => {
+export const getEventByIdService = (id: string): Event | undefined => {
   return events.find((event) => event.id === id);
 };
 
-export const deleteEventService = (id: number): boolean => {
+export const deleteEventService = (id: string): boolean => {
   const index = events.findIndex((e) => e.id === id);
 
   if (index === -1) return false;
@@ -27,7 +29,7 @@ export const deleteEventService = (id: number): boolean => {
 };
 
 export const updateEventService = (
-  id: number,
+  id: string,
   updatedEvent: Partial<Event>,
 ): Event | undefined => {
   const index = events.findIndex((e) => e.id === id);

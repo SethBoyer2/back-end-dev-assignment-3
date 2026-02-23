@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { Event } from "../models/models";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import {
@@ -8,35 +8,33 @@ import {
   createEventService,
   updateEventService,
 } from "../services/eventServices";
+import { successResponse } from "../models/responseModel";
 
-export const getAllEvents = (req: Request, res: Response): void => {
-  try {
-    const events = getAllEventsService();
-    res.status(HTTP_STATUS.OK).json({
-      message: "List of events retrieved",
-      data: events,
-    });
-  } catch (error: unknown) {
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-      message: "Failed to retrieve events",
-    });
-  }
+export const getAllEvents = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const events: Event[] = await getAllEventsService();
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(events, "Items retrieved successfully")
+        );
+    } catch (error) {
+        next(error);
+    }
 };
 
-export const deleteEvent = (req: Request, res: Response): void => {
-  const result = deleteEventService(Number(req.params.id));
-
-  if (result) {
-    res
-      .status(HTTP_STATUS.NO_CONTENT)
-      .json({ message: "Event deleted successfully" });
-  } else {
-    res.status(HTTP_STATUS.NOT_FOUND).send();
-  }
+export const deleteEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const id = req.params.id as string;
+        await deleteEventService(id);
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(null, "Item deleted successfully")
+        );
+    } catch (error) {
+        next(error);
+    }
 };
 
 export const getEventById = (req: Request, res: Response): void => {
-  const event: Event | undefined = getEventByIdService(Number(req.params.id));
+  const event: Event | undefined = getEventByIdService(String(req.params.id));
 
   if (event) {
     res.status(HTTP_STATUS.OK).json({ message: "Event found", data: event });
@@ -65,7 +63,7 @@ export const createEvent = (req: Request, res: Response): void => {
 export const updateEvent = (req: Request, res: Response): void => {
   const updatedEvent: Event = req.body;
   const result: Event | undefined = updateEventService(
-    Number(req.params.id),
+    String(req.params.id),
     updatedEvent,
   );
 

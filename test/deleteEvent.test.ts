@@ -8,7 +8,7 @@ describe("Delete Event validation", () => {
   it("Should delete an event with a valid id", () => {
 
     // Arrange
-    const validId = 1
+    const validId = "1"
 
     // Act
     const result = services.deleteEventService(validId)

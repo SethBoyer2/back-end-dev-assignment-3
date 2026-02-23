@@ -7,7 +7,7 @@ describe("Create Event Validation", () => {
   it("Should successfully create an event given valid parameters", async () => {
     // Arrange
     const validEvent = {
-      id: 1,
+      id: "1",
       name: "Test Event",
       date: new Date("2026-03-01"),
       capacity: 50,
