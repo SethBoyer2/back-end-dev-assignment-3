@@ -63,14 +63,14 @@ export const createEvent = async (req: Request, res: Response, next: NextFunctio
 export const updateEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const id = req.params.id as string
-        const { name, description, price } = req.body
+        const { name, date, capacity, status, category } = req.body
 
         // Create update data object with only the fields that can be updated
-        const updateData = { name, description, price }
+        const updateData = { name, date, capacity, status, category }
 
-        const updatedItem: Item = await itemService.updateItem(id, updateData)
+        const updatedEvent: Event = await updateEventService(id, updateData)
         res.status(HTTP_STATUS.OK).json(
-            successResponse(updatedItem, "Item updated successfully")
+            successResponse(updatedEvent, "Item updated successfully")
         )
     } catch (error) {
         next(error)
