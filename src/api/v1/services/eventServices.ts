@@ -28,7 +28,7 @@ export const deleteEventService = (id: number): boolean => {
 
 export const updateEventService = (
   id: number,
-  updatedEvent: Event,
+  updatedEvent: Partial<Event>,
 ): Event | undefined => {
   const index = events.findIndex((e) => e.id === id);
 
