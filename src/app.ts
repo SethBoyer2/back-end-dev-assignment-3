@@ -6,7 +6,7 @@ dotenv.config();
 import { eventRouter } from "./api/v1/routes/eventRoutes";
 import morgan from "morgan";
 import setupSwagger from "config/swagger";
-import helmet from "helmet";
+import { getHelmetConfig } from "config/helmetConfig";
 
 
 // Initialize Express application
@@ -15,7 +15,7 @@ const app: Express = express();
 
 app.use(morgan("combined"));
 app.use(express.json());
-app.use(helmet());
+app.use(getHelmetConfig());
 app.use("/api/v1/", eventRouter);
 
 app.get("/", (req, res) => {
