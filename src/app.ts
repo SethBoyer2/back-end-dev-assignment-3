@@ -1,7 +1,12 @@
 import express, { Express } from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import { eventRouter } from "./api/v1/routes/eventRoutes";
 import morgan from "morgan";
 import setupSwagger from "config/swagger";
+
 
 // Initialize Express application
 
