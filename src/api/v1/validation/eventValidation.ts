@@ -72,6 +72,37 @@ export const itemSchemas = {
         }),
     }),
   },
+  /**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Error:
+ *       type: object
+ *       required:
+ *         - error
+ *         - message
+ *       properties:
+ *         error:
+ *           type: string
+ *           description: Error type or code
+ *           example: "VALIDATION_ERROR"
+ *         message:
+ *           type: string
+ *           description: Human-readable error message
+ *           example: "Date cannot be empty"
+ *         details:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               field:
+ *                 type: string
+ *                 example: "Capacity"
+ *               issue:
+ *                 type: string
+ *                 example: "Capacity field cannot be empty."
+ *           description: Detailed validation errors (optional)
+ */
 
   getById: {
     params: Joi.object({
