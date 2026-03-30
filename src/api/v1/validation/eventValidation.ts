@@ -1,5 +1,39 @@
 import Joi from "joi";
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Item:
+ *       type: object
+ *       required:
+ *         - name
+ *         - date
+ *         - capacity
+ *         - status
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the event
+ *           example: "Joe Rogan blows stuff up LIVE"
+ *         date:
+ *           type: Date
+ *           format: date-time
+ *           description: The date of the event
+ *           example: ""2024-01-20T14:45:00Z""
+ *         capacity:
+ *           type: number
+ *           description: Total capacity the event can host
+ *           example: 500
+ *         status:
+ *           type: string
+ *           description: Status of the event (Active, Cancelled, Complete)
+ *           example: "Active"
+ *         registrationCount:
+ *           type: number
+ *           description: The number of people registered for the event
+ *           example: 450
+ */
 export const itemSchemas = {
   create: {
     body: Joi.object({
