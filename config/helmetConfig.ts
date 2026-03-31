@@ -1,13 +1,13 @@
 // config/helmetConfig.ts - Recommended starter configuration
-import helmet from "helmet";
+import helmet, { crossOriginEmbedderPolicy } from "helmet";
 
 export const getHelmetConfig = () => {
     const isDevelopment = process.env.NODE_ENV === "development";
 
     // Base configuration for APIs
     const baseConfig = {
-        frameguard: false, // Not needed as this API does not return HTML
         contentSecurityPolicy: false, // Disable for JSON APIs
+        crossOriginEmbedderPolicy: false,
         hidePoweredBy: true, // Always hide server info
         noSniff: true, // Always prevent MIME sniffing
     };
