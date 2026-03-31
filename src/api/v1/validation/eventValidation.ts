@@ -4,7 +4,7 @@ import Joi from "joi";
  * @openapi
  * components:
  *   schemas:
- *     Item:
+ *     Event:
  *       type: object
  *       required:
  *         - name
@@ -17,10 +17,10 @@ import Joi from "joi";
  *           description: The name of the event
  *           example: "Joe Rogan blows stuff up LIVE"
  *         date:
- *           type: Date
+ *           type: string
  *           format: date-time
  *           description: The date of the event
- *           example: ""2024-01-20T14:45:00Z""
+ *           example: "2024-01-20T14:45:00Z"
  *         capacity:
  *           type: number
  *           description: Total capacity the event can host

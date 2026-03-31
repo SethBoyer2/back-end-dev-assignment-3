@@ -24,18 +24,18 @@ export const eventRouter: Router = express.Router();
  *         required: true
  *         schema:
  *           type: string
- *         description: The unique identifier of the item
+ *         description: The unique identifier of the event
  *     responses:
  *       '200':
  *         description: successfully retrieved event(s)
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/validations/Item'
+ *               $ref: '#/components/schemas/Event'
  *       '404':
- *         description: Item not found
+ *         description: Event not found
  *       '403':
- *         description: Not authorized to update this item
+ *         description: Not authorized to update this event
  */
 eventRouter.get(
   "/events/:id",
@@ -113,7 +113,7 @@ eventRouter.delete("/events/:id", deleteEvent);
  *                 events:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/validations/User'
+ *                     $ref: '#/components/schemas/Event'
  *                 total:
  *                   type: integer
  *                 page:
