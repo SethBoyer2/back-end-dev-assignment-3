@@ -6,7 +6,7 @@ export const getHelmetConfig = () => {
 
     // Base configuration for APIs
     const baseConfig = {
-        frameguard: true, // Clickjacking protection if API contents are ever placed in a frame
+        frameguard: false, // Not needed as this API does not return HTML
         contentSecurityPolicy: false, // Disable for JSON APIs
         hidePoweredBy: true, // Always hide server info
         noSniff: true, // Always prevent MIME sniffing

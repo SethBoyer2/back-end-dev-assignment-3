@@ -14,7 +14,7 @@ export const eventRouter: Router = express.Router();
 
 /**
  * @openapi
- * /events/{eventId}:
+ * /events/:id:
  *   get:
  *     summary: display specific event based on ID
  *     tags: [Events]
@@ -45,23 +45,14 @@ eventRouter.get(
 
 /**
  * @openapi
- * /events/{eventID}:
+ * /events/{id}:
  *   put:
  *     summary: Update a specific event's information
  *     tags: [Events]
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - name: string
- *         in: path
- *       - date: Date
- *         in: path
- *         format: date-time
- *         required: true
- *       - status: string
- *         in: path
- *         required: true
- *       - capacity: number
+ *       - name: id
  *         in: path
  *         required: true
  *         schema:
@@ -71,18 +62,35 @@ eventRouter.get(
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/validations/Item'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Updated name of the event
+ *               date:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Updated event date
+ *               status:
+ *                 type: string
+ *                 enum: [Active, Cancelled, Completed]
+ *                 description: Updated event status
+ *               capacity:
+ *                 type: number
+ *                 description: Updated capacity
  *     responses:
- *       '200':
- *         description: Event updated successfully
+ *       '201':
+ *         description: Event created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/validations/Item'
- *       '404':
- *         description: Item not found
- *       '403':
- *         description: Not authorized to update this item
+ *               $ref: '#/components/schemas/Event'
+ *       '400':
+ *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
  */
 eventRouter.put("/events/:id", updateEvent);
 
@@ -102,7 +110,7 @@ eventRouter.delete("/events/:id", deleteEvent);
  *             schema:
  *               type: object
  *               properties:
- *                 users:
+ *                 events:
  *                   type: array
  *                   items:
  *                     $ref: '#/components/validations/User'
@@ -143,7 +151,8 @@ eventRouter.get("/events", getAllEvents);
  *               status:
  *                   type: string
  *                   description: The status of the event
- *                   example: ["Active", "Cancelled", "Completed"]
+ *                   enum: ["active", "cancelled", "completed"]
+ *                   example: ["active"]
  *               capacity:
  *                   type: number
  *                   description: The amount of people the event can host
@@ -154,7 +163,7 @@ eventRouter.get("/events", getAllEvents);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Post'
+ *               $ref: '#/components/schemas/Event'
  *       '400':
  *         description: Invalid input data
  *         content:
