@@ -58,6 +58,7 @@ https://helmetjs.github.io/
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
+        maxAge: 600
     };
 };
 
@@ -67,6 +68,8 @@ Allow all origins in development for general ease to work with
 In prod, only allow origins from the list of allowed origins, and only allow the headers Content-Type and Authorization,
 because that is generally all we use in terms of headers. Allowing any others could open up vulnerabilities.
 And we allow the most widely-used method types.
+
+Also added maxAge for performance purposes, as it allows CORs to cache preflight results
 
 ## Sources
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
