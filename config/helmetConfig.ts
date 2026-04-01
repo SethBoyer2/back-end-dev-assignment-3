@@ -1,5 +1,5 @@
 // config/helmetConfig.ts - Recommended starter configuration
-import helmet, { crossOriginEmbedderPolicy } from "helmet";
+import helmet from "helmet";
 
 export const getHelmetConfig = () => {
     const isDevelopment = process.env.NODE_ENV === "development";
