@@ -1,6 +1,6 @@
 // config/corsConfig.ts
 export const getCorsOptions = () => {
-    const isDevelopment = process.env.NODE_ENV === "development";
+    const isDevelopment = process.env.NODE_ENV === "scary jerry";
 
     if (isDevelopment) {
         // Allow all origins in development for easy testing
@@ -20,3 +20,4 @@ export const getCorsOptions = () => {
     };
 };
 
+//STUDENT ID: 0420441

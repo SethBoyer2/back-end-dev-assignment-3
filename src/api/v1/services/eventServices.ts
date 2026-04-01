@@ -20,7 +20,7 @@ export const getAllEventsService = async (): Promise<Event[]> => {
             return {
                 id: doc.id, // Had to explicitly pass all values, the spread from the demo file resulted in type errors
                 name: data.name,
-                date:data.date.toDate(),
+                date:data.date,
                 capacity: data.capacity,
                 registrationCount: data.registrationCount,
                 status: data.status,

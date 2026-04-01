@@ -16,9 +16,11 @@ import { getCorsOptions } from "../config/corsConfig"
 const app: Express = express();
 
 app.use(morgan("combined"));
-app.use(express.json());
-app.use(getHelmetConfig());
 app.use(cors(getCorsOptions()));
+app.use(getHelmetConfig());
+app.use(express.json());
+
+
 app.use("/api/v1/", eventRouter);
 
 app.get("/", (req, res) => {
