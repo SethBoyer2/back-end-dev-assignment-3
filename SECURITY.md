@@ -33,6 +33,8 @@ point in having it enabled, as it can break client requests due to the request l
 
 hidePoweredBy: true = Hides server information to reduce the amount of information that can be gathered about our systems
 
+xssFilter: false = largely useless header that was made during the Internet Explorer days. In our case, it's extra useless because we are JSON-only
+
 noSniff: true = prevents MIME sniffing and possible xss or injection attacks.
 ^ Effectively only allows the browser to accept content types that match the content-type header, which prevents JSON files being treated like JS scripts
 

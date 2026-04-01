@@ -1,5 +1,5 @@
 // config/helmetConfig.ts - Recommended starter configuration
-import helmet from "helmet";
+import helmet, { xssFilter } from "helmet";
 
 export const getHelmetConfig = () => {
     const isDevelopment = process.env.NODE_ENV === "development";
@@ -10,6 +10,7 @@ export const getHelmetConfig = () => {
         crossOriginEmbedderPolicy: false,
         hidePoweredBy: true, // Always hide server info
         noSniff: true, // Always prevent MIME sniffing
+        xssFilter: false
     };
 
     if (isDevelopment) {
@@ -27,6 +28,7 @@ export const getHelmetConfig = () => {
             includeSubDomains: true,
             preload: true,
         },
+        xssFilter: false,
         frameguard: { action: "deny" },
         referrerPolicy: { policy: "no-referrer" },
     });
